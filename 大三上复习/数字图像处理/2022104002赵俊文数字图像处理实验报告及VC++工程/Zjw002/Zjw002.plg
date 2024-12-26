@@ -1,0 +1,60 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Zjw002 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Debug/Zjw002.res" /d "_DEBUG" /d "_AFXDLL" "D:\Digital Image\Zjw002\Zjw002.rc"" 
+Creating temporary file "C:\Users\Asus\AppData\Local\Temp\RSPFC98.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/Zjw002.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Digital Image\Zjw002\Bmp.cpp"
+"D:\Digital Image\Zjw002\HistogramDlg.cpp"
+"D:\Digital Image\Zjw002\MainFrm.cpp"
+"D:\Digital Image\Zjw002\Zjw002.cpp"
+"D:\Digital Image\Zjw002\Zjw002Doc.cpp"
+"D:\Digital Image\Zjw002\Zjw002View.cpp"
+]
+Creating command line "cl.exe @C:\Users\Asus\AppData\Local\Temp\RSPFC98.tmp" 
+Creating temporary file "C:\Users\Asus\AppData\Local\Temp\RSPFC99.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/Zjw002.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Digital Image\Zjw002\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\Asus\AppData\Local\Temp\RSPFC99.tmp" 
+Creating temporary file "C:\Users\Asus\AppData\Local\Temp\RSPFC9A.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Zjw002.pdb" /debug /machine:I386 /out:"Debug/Zjw002.exe" /pdbtype:sept 
+".\Debug\Bmp.obj"
+".\Debug\HistogramDlg.obj"
+".\Debug\MainFrm.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Zjw002.obj"
+".\Debug\Zjw002Doc.obj"
+".\Debug\Zjw002View.obj"
+".\Debug\Zjw002.res"
+]
+Creating command line "link.exe @C:\Users\Asus\AppData\Local\Temp\RSPFC9A.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Bmp.cpp
+HistogramDlg.cpp
+MainFrm.cpp
+Zjw002.cpp
+Zjw002Doc.cpp
+Zjw002View.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Zjw002.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
