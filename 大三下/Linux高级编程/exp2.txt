@@ -1,0 +1,21 @@
+from openai import OpenAI
+
+client = OpenAI(
+    api_key = "sk-BGd3wqRYzma8JRUYgLlPdOxbAAAjR7RbUKSYFKyqLPadkNmj",
+    base_url = "https://api.chatanywhere.tech/v1"
+)
+
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+          "role": "system",
+          "content": "你是一个古诗词专家，尤其对唐诗的研究颇有造诣。",
+        },
+        {
+          "role": "user",
+          "content": "评价一下《春江花月夜》",
+        }
+    ],
+    model="gpt-3.5-turbo-0125",
+)
+print(chat_completion.choices[0].message.content)
