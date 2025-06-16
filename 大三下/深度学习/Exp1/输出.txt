@@ -1,0 +1,265 @@
+PS D:\review&task\大三下\深度学习> & D:/program_files/python3.11.6/python.exe "d:/review&task/大三下/深度学习/Deep learning/Deep learning/cnjyputer.py"
+Traceback (most recent call last):
+  File "d:\review&task\大三下\深度学习\Deep learning\Deep learning\cnjyputer.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+PS D:\review&task\大三下\深度学习> & D:/anaconda/envs/zjwpython310/python.exe "d:/review&task/大三下/深度学习/Deep learning/Deep learning/cnjyputer.py"
+创建第一个顺序模型
+模型结构: Sequential(
+  (0): Linear(in_features=20, out_features=256, bias=True)
+  (1): ReLU()
+  (2): Linear(in_features=256, out_features=10, bias=True)
+)
+输入数据形状: torch.Size([2, 20])
+输出结果形状: torch.Size([2, 10])
+输出结果前5个元素: tensor([-0.1985,  0.0738, -0.1625, -0.0295,  0.0411], grad_fn=<SliceBackward0>)
+
+==================================================
+创建自定义MLP类
+初始化MLP: 隐藏层大小=torch.Size([256, 20]), 输出层大小=torch.Size([10, 256])
+调用MLP模型进行前向传播
+隐藏层输出形状: torch.Size([2, 256])
+激活后形状: torch.Size([2, 256])
+最终输出形状: torch.Size([2, 10])
+MLP输出结果前5个元素: tensor([ 0.0441,  0.1256, -0.1970,  0.0277,  0.0360], grad_fn=<SliceBackward0>)
+
+==================================================
+创建自定义Sequential类
+添加模块 0: Linear(in_features=20, out_features=256, bias=True)
+添加模块 1: ReLU()
+添加模块 2: Linear(in_features=256, out_features=10, bias=True)
+调用MySequential模型进行前向传播
+MySequential输入形状: torch.Size([2, 20])
+经过模块 0 后的形状: torch.Size([2, 256])
+经过模块 1 后的形状: torch.Size([2, 256])
+经过模块 2 后的形状: torch.Size([2, 10])
+MySequential输出结果前5个元素: tensor([ 0.3055, -0.1197, -0.0085, -0.0208, -0.1450], grad_fn=<SliceBackward0>)
+
+==================================================
+创建具有固定权重的MLP
+创建固定随机权重，形状: torch.Size([20, 20])
+创建共享线性层，权重形状: torch.Size([20, 20])
+调用FixedHiddenMLP模型进行前向传播
+FixedHiddenMLP输入形状: torch.Size([2, 20])
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 16.15888786315918
+缩放次数: 5，缩放后绝对值之和: 0.5049652457237244
+最终输出(标量): 0.2638466954231262
+FixedHiddenMLP输出结果: 0.2638466954231262
+
+==================================================
+创建嵌套MLP
+创建混合模型Chimera
+创建内部Sequential网络: Sequential(
+  (0): Linear(in_features=20, out_features=64, bias=True)
+  (1): ReLU()
+  (2): Linear(in_features=64, out_features=32, bias=True)
+  (3): ReLU()
+)
+创建输出线性层: Linear(in_features=32, out_features=16, bias=True)
+创建固定随机权重，形状: torch.Size([20, 20])
+创建共享线性层，权重形状: torch.Size([20, 20])
+Chimera模型结构: Sequential(
+  (0): NestMLP(
+    (net): Sequential(
+      (0): Linear(in_features=20, out_features=64, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=64, out_features=32, bias=True)
+      (3): ReLU()
+    )
+    (linear): Linear(in_features=32, out_features=16, bias=True)
+  )
+  (1): Linear(in_features=16, out_features=20, bias=True)
+  (2): FixedHiddenMLP(
+    (linear): Linear(in_features=20, out_features=20, bias=True)
+  )
+)
+调用Chimera模型进行前向传播
+NestMLP输入形状: torch.Size([2, 20])
+内部网络输出形状: torch.Size([2, 32])
+最终输出形状: torch.Size([2, 16])
+FixedHiddenMLP输入形状: torch.Size([2, 20])
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+最终输出(标量): 0.16244763135910034
+Chimera最终输出: 0.16244763135910034
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+最终输出(标量): 0.16244763135910034
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+第一次线性变换后形状: torch.Size([2, 20])
+第一次线性变换后形状: torch.Size([2, 20])
+第一次线性变换后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+矩阵乘法后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+最终输出(标量): 0.16244763135910034
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+ReLU激活后形状: torch.Size([2, 20])
+第二次线性变换后形状: torch.Size([2, 20])
+绝对值之和: 19.452281951904297
+缩放次数: 5，缩放后绝对值之和: 0.6078838109970093
+最终输出(标量): 0.16244763135910034
+Chimera最终输出: 0.16244763135910034
+PS D:\review&task\大三下\深度学习> & D:/anaconda/envs/zjwpython310/python.exe "d:/review&task/大三下/深度学习/Deep learning/Deep learning/shiyan1.py"
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz to ./data\FashionMNIST\raw\train-images-idx3-ubyte.gz
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26421880/26421880 [21:13<00:00, 20740.67it/s] 
+Extracting ./data\FashionMNIST\raw\train-images-idx3-ubyte.gz to ./data\FashionMNIST\raw
+
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-labels-idx1-ubyte.gz
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-labels-idx1-ubyte.gz to ./data\FashionMNIST\raw\train-labels-idx1-ubyte.gz
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 29515/29515 [00:00<00:00, 67826.31it/s]
+Extracting ./data\FashionMNIST\raw\train-labels-idx1-ubyte.gz to ./data\FashionMNIST\raw
+
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-images-idx3-ubyte.gz
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-images-idx3-ubyte.gz to ./data\FashionMNIST\raw\t10k-images-idx3-ubyte.gz
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4422102/4422102 [00:07<00:00, 601696.78it/s]
+Extracting ./data\FashionMNIST\raw\t10k-images-idx3-ubyte.gz to ./data\FashionMNIST\raw
+
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-labels-idx1-ubyte.gz
+Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-labels-idx1-ubyte.gz to ./data\FashionMNIST\raw\t10k-labels-idx1-ubyte.gz
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5148/5148 [00:00<?, ?it/s]
+Extracting ./data\FashionMNIST\raw\t10k-labels-idx1-ubyte.gz to ./data\FashionMNIST\raw
+
+Using device: cuda
+Starting training...
+Epoch 1/10, Train Loss: 0.5211, Train Acc: 0.8098, Test Loss: 0.4624, Test Acc: 0.8327
+Epoch 2/10, Train Loss: 0.3890, Train Acc: 0.8569, Test Loss: 0.4758, Test Acc: 0.8169
+Epoch 3/10, Train Loss: 0.3531, Train Acc: 0.8699, Test Loss: 0.3864, Test Acc: 0.8602
+Epoch 4/10, Train Loss: 0.3310, Train Acc: 0.8767, Test Loss: 0.3546, Test Acc: 0.8740
+Epoch 5/10, Train Loss: 0.3124, Train Acc: 0.8845, Test Loss: 0.3586, Test Acc: 0.8763
+Epoch 6/10, Train Loss: 0.2981, Train Acc: 0.8887, Test Loss: 0.3507, Test Acc: 0.8750
+Epoch 7/10, Train Loss: 0.2852, Train Acc: 0.8939, Test Loss: 0.3687, Test Acc: 0.8658
+Epoch 8/10, Train Loss: 0.2715, Train Acc: 0.8996, Test Loss: 0.3473, Test Acc: 0.8778
+Epoch 9/10, Train Loss: 0.2632, Train Acc: 0.9013, Test Loss: 0.3484, Test Acc: 0.8780
+Epoch 10/10, Train Loss: 0.2561, Train Acc: 0.9051, Test Loss: 0.3406, Test Acc: 0.8832
+
+Starting K-fold cross validation...
+Fold 1/5
+  Epoch 1/10, Train Loss: 0.5454, Train Acc: 0.8030, Val Loss: 0.4120, Val Acc: 0.8536
+  Epoch 2/10, Train Loss: 0.4056, Train Acc: 0.8516, Val Loss: 0.3767, Val Acc: 0.8649
+  Epoch 3/10, Train Loss: 0.3664, Train Acc: 0.8637, Val Loss: 0.3828, Val Acc: 0.8612
+  Epoch 4/10, Train Loss: 0.3425, Train Acc: 0.8740, Val Loss: 0.3660, Val Acc: 0.8658
+  Epoch 5/10, Train Loss: 0.3228, Train Acc: 0.8796, Val Loss: 0.3514, Val Acc: 0.8714
+  Epoch 6/10, Train Loss: 0.3076, Train Acc: 0.8851, Val Loss: 0.3410, Val Acc: 0.8748
+  Epoch 7/10, Train Loss: 0.2940, Train Acc: 0.8898, Val Loss: 0.3159, Val Acc: 0.8857
+  Epoch 8/10, Train Loss: 0.2835, Train Acc: 0.8950, Val Loss: 0.3171, Val Acc: 0.8854
+  Epoch 9/10, Train Loss: 0.2725, Train Acc: 0.8984, Val Loss: 0.3495, Val Acc: 0.8761
+  Epoch 10/10, Train Loss: 0.2643, Train Acc: 0.9021, Val Loss: 0.3232, Val Acc: 0.8890
+Fold 1 - Final Test Accuracy: 0.8751
+Fold 2/5
+  Epoch 1/10, Train Loss: 0.5430, Train Acc: 0.8028, Val Loss: 0.4763, Val Acc: 0.8254
+  Epoch 2/10, Train Loss: 0.4017, Train Acc: 0.8537, Val Loss: 0.4168, Val Acc: 0.8428
+  Epoch 3/10, Train Loss: 0.3640, Train Acc: 0.8669, Val Loss: 0.3568, Val Acc: 0.8676
+  Epoch 4/10, Train Loss: 0.3375, Train Acc: 0.8761, Val Loss: 0.3841, Val Acc: 0.8601
+  Epoch 5/10, Train Loss: 0.3195, Train Acc: 0.8829, Val Loss: 0.3450, Val Acc: 0.8692
+  Epoch 6/10, Train Loss: 0.3054, Train Acc: 0.8859, Val Loss: 0.3552, Val Acc: 0.8662
+  Epoch 7/10, Train Loss: 0.2909, Train Acc: 0.8923, Val Loss: 0.3476, Val Acc: 0.8722
+  Epoch 8/10, Train Loss: 0.2802, Train Acc: 0.8963, Val Loss: 0.3405, Val Acc: 0.8761
+  Epoch 9/10, Train Loss: 0.2698, Train Acc: 0.8998, Val Loss: 0.3329, Val Acc: 0.8749
+  Epoch 10/10, Train Loss: 0.2605, Train Acc: 0.9022, Val Loss: 0.3203, Val Acc: 0.8825
+Fold 2 - Final Test Accuracy: 0.8768
+Fold 3/5
+  Epoch 1/10, Train Loss: 0.5448, Train Acc: 0.8002, Val Loss: 0.4409, Val Acc: 0.8383
+  Epoch 2/10, Train Loss: 0.4044, Train Acc: 0.8532, Val Loss: 0.3906, Val Acc: 0.8498
+  Epoch 3/10, Train Loss: 0.3673, Train Acc: 0.8647, Val Loss: 0.3517, Val Acc: 0.8773
+  Epoch 4/10, Train Loss: 0.3401, Train Acc: 0.8742, Val Loss: 0.4118, Val Acc: 0.8538
+  Epoch 5/10, Train Loss: 0.3215, Train Acc: 0.8805, Val Loss: 0.3675, Val Acc: 0.8680
+  Epoch 6/10, Train Loss: 0.3069, Train Acc: 0.8857, Val Loss: 0.3344, Val Acc: 0.8742
+  Epoch 7/10, Train Loss: 0.2955, Train Acc: 0.8894, Val Loss: 0.3075, Val Acc: 0.8888
+  Epoch 8/10, Train Loss: 0.2826, Train Acc: 0.8940, Val Loss: 0.3233, Val Acc: 0.8825
+  Epoch 9/10, Train Loss: 0.2724, Train Acc: 0.8965, Val Loss: 0.3150, Val Acc: 0.8862
+  Epoch 10/10, Train Loss: 0.2635, Train Acc: 0.9010, Val Loss: 0.3423, Val Acc: 0.8710
+Fold 3 - Final Test Accuracy: 0.8609
+Fold 4/5
+  Epoch 1/10, Train Loss: 0.5421, Train Acc: 0.8026, Val Loss: 0.5080, Val Acc: 0.8283
+  Epoch 2/10, Train Loss: 0.4033, Train Acc: 0.8521, Val Loss: 0.3719, Val Acc: 0.8688
+  Epoch 3/10, Train Loss: 0.3641, Train Acc: 0.8660, Val Loss: 0.3768, Val Acc: 0.8649
+  Epoch 4/10, Train Loss: 0.3403, Train Acc: 0.8742, Val Loss: 0.3693, Val Acc: 0.8710
+  Epoch 5/10, Train Loss: 0.3212, Train Acc: 0.8800, Val Loss: 0.3312, Val Acc: 0.8822
+  Epoch 6/10, Train Loss: 0.3059, Train Acc: 0.8856, Val Loss: 0.3279, Val Acc: 0.8806
+  Epoch 7/10, Train Loss: 0.2947, Train Acc: 0.8894, Val Loss: 0.3482, Val Acc: 0.8690
+  Epoch 8/10, Train Loss: 0.2836, Train Acc: 0.8928, Val Loss: 0.3258, Val Acc: 0.8825
+  Epoch 9/10, Train Loss: 0.2725, Train Acc: 0.8965, Val Loss: 0.3348, Val Acc: 0.8800
+  Epoch 10/10, Train Loss: 0.2610, Train Acc: 0.9027, Val Loss: 0.3366, Val Acc: 0.8821
+Fold 4 - Final Test Accuracy: 0.8684
+Fold 5/5
+  Epoch 1/10, Train Loss: 0.5457, Train Acc: 0.8025, Val Loss: 0.4562, Val Acc: 0.8347
+  Epoch 2/10, Train Loss: 0.4043, Train Acc: 0.8515, Val Loss: 0.3957, Val Acc: 0.8521
+  Epoch 3/10, Train Loss: 0.3649, Train Acc: 0.8660, Val Loss: 0.3723, Val Acc: 0.8670
+  Epoch 4/10, Train Loss: 0.3415, Train Acc: 0.8723, Val Loss: 0.3541, Val Acc: 0.8739
+  Epoch 5/10, Train Loss: 0.3206, Train Acc: 0.8811, Val Loss: 0.3660, Val Acc: 0.8598
+  Epoch 6/10, Train Loss: 0.3059, Train Acc: 0.8857, Val Loss: 0.3392, Val Acc: 0.8755
+  Epoch 7/10, Train Loss: 0.2923, Train Acc: 0.8906, Val Loss: 0.3545, Val Acc: 0.8741
+  Epoch 8/10, Train Loss: 0.2814, Train Acc: 0.8947, Val Loss: 0.3803, Val Acc: 0.8589
+  Epoch 9/10, Train Loss: 0.2709, Train Acc: 0.8978, Val Loss: 0.3401, Val Acc: 0.8787
+  Epoch 10/10, Train Loss: 0.2604, Train Acc: 0.9023, Val Loss: 0.3293, Val Acc: 0.8826
+Fold 5 - Final Test Accuracy: 0.8730
+
+K-fold Cross Validation Results:
+   Fold  Train Accuracy  Validation Accuracy  Test Accuracy
+0     1        0.902125             0.889000         0.8751
+1     2        0.902250             0.882500         0.8768
+2     3        0.901000             0.871000         0.8609
+3     4        0.902729             0.882083         0.8684
+4     5        0.902312             0.882583         0.8730
+Average Test Accuracy: 0.8708
+PS D:\review&task\大三下\深度学习>
